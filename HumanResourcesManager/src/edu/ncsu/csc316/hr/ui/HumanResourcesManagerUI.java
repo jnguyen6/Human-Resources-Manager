@@ -17,7 +17,7 @@ import edu.ncsu.csc316.hr.manager.HumanResourcesManager;
 public class HumanResourcesManagerUI {
 
 	/** The instance variable of the human resources manager. */
-	private HumanResourcesManager hr;
+	private HumanResourcesManager hrm;
 	
 	/**
 	 * Method that starts the program. The user will first be prompted to provide
@@ -69,6 +69,31 @@ public class HumanResourcesManagerUI {
 	 * @param resumeFile the resume information input file
 	 */
 	public void processUserAction(Scanner console, String employeeFile, String resumeFile) {
-		
+		hrm = new HumanResourcesManager(employeeFile, resumeFile);
+		String input = "";
+		System.out.print("Generate Organizational Profile (G), Remove an Employee from the "
+				+ "HR system (R), or Quit the Program (Q): ");
+		input = console.nextLine();
+		if (input.equalsIgnoreCase("G")) {
+			System.out.print("Generating Organizational Profile...\n\n");
+			System.out.print("\n\nThe organizational profile has been sucessfully created."
+					+ "\nQuitting program.");
+		} else if (input.equalsIgnoreCase("R")) {
+			String name = "";
+			System.out.print("Please provide the first and last name of the employee to "
+					+ "remove from the HR system: ");
+			name = console.nextLine();
+			Scanner lineScanner = new Scanner(name);
+			System.out.print("Removing employee...\n\n");
+			String interimEmployee = hrm.removeEmployee(lineScanner.next(), lineScanner.next());
+			lineScanner.close();
+			System.out.print("The employee has been removed from the HR system, and the HR system "
+					+ "is updated accordingly. The interim employee is " + interimEmployee
+					+ ".\nQuitting program.");
+		} else {
+			System.out.print("\nThe Human Resources program will close.");
+		}
+		console.close();
+		System.exit(1);
 	}
 }

@@ -14,9 +14,9 @@ import edu.ncsu.csc316.hr.data.Employee;
  */
 public class HumanResourcesManager {
 
-	/** A tree that contains resume information. */
+	/** A search tree that contains resume information. */
 	private Dictionary<Resume> resumeTree;
-	/** A tree that contains employee information. */
+	/** A general tree that contains employee information. */
 	private Tree<Employee> employeeTree;
 	
 	/**
