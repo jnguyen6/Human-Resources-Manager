@@ -7,42 +7,35 @@ package edu.ncsu.csc316.hr.adt;
  * @param <E> the generic element type
  */
 public interface Tree<E> {
-
-	/**
-	 * Returns the element stored in the node or position.
-	 * 
-	 * @return the element stored in the node or position
-	 */
-	E getElement();
 	
 	/**
-	 * Returns the root of the tree.
+	 * Adds an element and its corresponding key to the tree.
 	 * 
-	 * @return the root of the tree
+	 * @param k the key to add to the tree
+	 * @param e the element to add to the tree
 	 */
-	E root();
+	void insert(E k, E e);
 	
 	/**
-	 * Returns the parent of the given node or position.
+	 * Removes and returns an element from the tree, given a key.
 	 * 
-	 * @param n the node or position to find the parent for
-	 * @return the parent of the given node or position
+	 * @param k the key to remove the element from
+	 * @return the removed element
 	 */
-	E parent(E n);
+	E remove(E k);
 	
 	/**
-	 * Returns the collection of children nodes or positions of
-	 * a given node or position.
+	 * Returns the size of the tree.
 	 * 
-	 * @param n the node or position to find the children for
-	 * @return the collection of children nodes or positions
+	 * @return the size of the tree
 	 */
+	int size();
 	
 	/**
-	 * Returns the number of children of the given node or position.
+	 * Determines if the tree is empty. Returns true if the tree is empty
+	 * or false otherwise.
 	 * 
-	 * @param n the node or position to find the number of children for
-	 * @return the number of children of the given node or position
+	 * @return true if the tree is empty or false otherwise
 	 */
-	int numChildren(E n);
+	boolean isEmpty();
 }
