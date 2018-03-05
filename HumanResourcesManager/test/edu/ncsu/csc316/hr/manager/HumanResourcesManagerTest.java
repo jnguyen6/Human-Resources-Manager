@@ -14,7 +14,7 @@ public class HumanResourcesManagerTest {
 	/** The employee information test file. */
 	private final String employeeFile = "input/sample.txt";
 	/** The resume information test file. */
-	private final String resumeFile = "input/sampe_resume.txt";
+	private final String resumeFile = "input/sample_resume.txt";
 	
 	/**
 	 * Tests the HumanResourcesManager constructor.
@@ -51,7 +51,17 @@ public class HumanResourcesManagerTest {
 	 */
 	@Test
 	public void testGenerateOrganizationalProfile() {
-		fail("Not yet implemented");
+		HumanResourcesManager hrm = new HumanResourcesManager(employeeFile, resumeFile);
+		String expected = "OrganizationalProfile[\n";
+		expected += "   Sarah Jones\n";
+		expected += "   John Smith\n";
+		expected += "   Jane Doe\n";
+		expected += "   Suzanne Meadows\n";
+		expected += "   Thomas Webb\n";
+		expected += "   Jessica Daniels\n";
+		expected += "   Kyle DeMarcino";
+		expected += "\n]";
+		assertEquals(expected, hrm.generateOrganizationalProfile());
 	}
 
 }

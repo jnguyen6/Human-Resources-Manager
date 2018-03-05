@@ -1,5 +1,6 @@
 package edu.ncsu.csc316.hr.io;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -26,12 +27,12 @@ public class EmployeeReader {
 	 * is invalid
 	 */
 	public static LinkedList<String> readEmployeeInformation(String employeeFile) throws FileNotFoundException {
-		Scanner fileScanner = new Scanner(employeeFile);
+		Scanner fileScanner = new Scanner(new FileInputStream(employeeFile));
 		LinkedList<String> employeeInfo = new LinkedList<String>();
 		//Essentially, we want to move each input line from the file as a separate element to
 		//add to the linked list queue implementation
 		while (fileScanner.hasNextLine()) {
-			employeeInfo.enqueue(fileScanner.nextLine());
+			employeeInfo.enqueue(fileScanner.nextLine().trim());
 		}
 		fileScanner.close();
 		return employeeInfo;

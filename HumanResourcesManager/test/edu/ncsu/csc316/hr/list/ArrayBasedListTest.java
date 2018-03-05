@@ -197,7 +197,6 @@ public class ArrayBasedListTest {
 	public void testLookUp() {
 		ArrayBasedList<String> l = new ArrayBasedList<String>();
 		assertEquals(null, l.lookUp("apple"));
-		assertEquals(null, l.lookUp("apple", null));
 	}
 }
 

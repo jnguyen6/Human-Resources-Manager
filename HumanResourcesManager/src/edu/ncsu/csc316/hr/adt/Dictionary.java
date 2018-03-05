@@ -1,7 +1,5 @@
 package edu.ncsu.csc316.hr.adt;
 
-import java.util.Comparator;
-
 /**
  * Interface class that represents the Dictionary abstract data type.
  * 
@@ -25,16 +23,6 @@ public interface Dictionary<E> {
 	 * @return the element found or null if the element was not found
 	 */
 	E lookUp(E k);
-	
-	/**
-	 * Returns the element from the list based on the given key value and
-	 * the specific Comparator class.
-	 * 
-	 * @param k the key value to search for
-	 * @param c the Comparator used for comparison
-	 * @return the element found or null if the element was not found
-	 */
-	E lookUp(E k, Comparator<E> c);
 	
 	/**
 	 * Returns the size of the list.

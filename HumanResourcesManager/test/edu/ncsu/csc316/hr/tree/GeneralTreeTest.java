@@ -70,7 +70,7 @@ public class GeneralTreeTest {
 		assertEquals("fruit", gt.getKey(gt.root()));
 		assertEquals("apple", gt.getElement(gt.root()));
 		assertNull(gt.parent(gt.root()));
-		assertNull(gt.getChildren(gt.root()));
+		assertEquals(0, gt.numChildren(gt.root()));
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class GeneralTreeTest {
 			assertEquals("fruit", gt.getKey(gt.root()));
 			assertEquals("apple", gt.getElement(gt.root()));
 		}
-		assertNull(gt.getChildren(gt.root()));
+		assertEquals(0, gt.numChildren(gt.root()));
 		gt.insert("vegetable", "cucumber");
 		assertEquals(1, gt.numChildren(gt.root()));
 		assertEquals("vegetable", gt.getKey(gt.getChildren(gt.root()).get(0)));
@@ -155,14 +155,14 @@ public class GeneralTreeTest {
 			gt.insert(null, "apple");
 			fail();
 		} catch (NullPointerException npe) {
-			assertEquals("The given key/element or node cannot be null.", npe.getMessage());
+			assertEquals("The key or element to add cannot be null.", npe.getMessage());
 			assertEquals(0, gt.size());
 		}
 		try {
 			gt.insert("fruit", null);
 			fail();
 		} catch (NullPointerException npe) {
-			assertEquals("The given key/element or node cannot be null.", npe.getMessage());
+			assertEquals("The key or element to add cannot be null.", npe.getMessage());
 			assertEquals(0, gt.size());
 		}
 		gt.insert("fruit", "apple");

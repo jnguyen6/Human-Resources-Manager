@@ -107,20 +107,6 @@ public class ArrayBasedList<E> implements List<E> {
 	}
 
 	/**
-	 * Returns the element from the list based on the given key value and the
-	 * specific Comparator class. Note that this method is not used for the 
-	 * HumanResourcesManager program, so the method is left unimplemented.
-	 * 
-	 * @param k the key value to search for
-	 * @return the element found or null if the element is not found
-	 */
-	@Override
-	public E lookUp(E k, Comparator<E> c) {
-		// not used
-		return null;
-	}
-
-	/**
 	 * Returns the size of the array list.
 	 * 
 	 * @return the size of the array list

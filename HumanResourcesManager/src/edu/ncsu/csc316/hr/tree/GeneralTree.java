@@ -1,6 +1,5 @@
 package edu.ncsu.csc316.hr.tree;
 
-
 import edu.ncsu.csc316.hr.adt.Tree;
 import edu.ncsu.csc316.hr.list.ArrayBasedList;
 
@@ -18,8 +17,8 @@ public class GeneralTree<E> implements Tree<E> {
 	private int size;
 	
 	/**
-	 * Constructor that creates an empty general tree and initializes the
-	 * root field to null and the size field to 0.
+	 * Constructor that creates an empty general tree, initializes the
+	 * root field to null, and initializes the size field to 0.
 	 */
 	public GeneralTree() {
 		root = null;
@@ -113,12 +112,8 @@ public class GeneralTree<E> implements Tree<E> {
 	}
 	
 	/**
-	 * Adds an element and its corresponding key to the tree. Note that
-	 * since the class uses a general tree as the underlying data structure,
-	 * the insert method wouldn't have much use other than adding the newly
-	 * created node to the collection of children nodes of the root node.
-	 * If the given key or element is null, then a NullPointerException is
-	 * thrown
+	 * Adds an element and its corresponding key to the tree. If the given
+	 * key or element is null, then a NullPointerException is thrown
 	 * 
 	 * @param k the key to add to the tree
 	 * @param e the element to add to the tree
@@ -255,7 +250,8 @@ public class GeneralTree<E> implements Tree<E> {
 	
 	/**
 	 * The inner class of the GeneralTree class that stores the key,
-	 * element, and reference to the parent and child nodes.
+	 * element, a reference to the parent node, and a collection of
+	 * child nodes.
 	 * 
 	 * @author Jimmy Nguyen
 	 */
