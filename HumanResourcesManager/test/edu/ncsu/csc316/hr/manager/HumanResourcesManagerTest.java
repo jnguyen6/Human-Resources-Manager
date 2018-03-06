@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.ncsu.csc316.hr.io.EmployeeReader;
+import edu.ncsu.csc316.hr.io.ResumeReader;
+
 /**
  * Tests the HumanResourcesManager class.
  * 
@@ -13,14 +16,21 @@ public class HumanResourcesManagerTest {
 
 	/** The employee information test file. */
 	private final String employeeFile = "input/sample.txt";
+	/** The second employee information test file. */
+	private final String employeeFile2 = "input/sample2.txt";
 	/** The resume information test file. */
 	private final String resumeFile = "input/sample-resume.txt";
+	/** The second resume information test file. */
+	private final String resumeFile2 = "input/sample-resume2.txt";
 	
 	/**
 	 * Tests the HumanResourcesManager constructor.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testHumanResourcesManager() {
+		EmployeeReader er = new EmployeeReader();
+		ResumeReader rr = new ResumeReader();
 		HumanResourcesManager hrm = new HumanResourcesManager(employeeFile, resumeFile);
 		assertTrue(hrm instanceof HumanResourcesManager);
 		try {
@@ -79,7 +89,8 @@ public class HumanResourcesManagerTest {
 		assertEquals(expectedOP, hrm.generateOrganizationalProfile());
 		assertEquals(expectedR, hrm.getResumeTree().elementsInLevelOrder());
 		
-		assertEquals("The employee Kyle DeMarcino had no employees to supervise.", hrm.removeEmployee("Kyle", "DeMarcino"));
+		assertEquals("The employee Kyle DeMarcino had no employees to supervise.",
+				hrm.removeEmployee("Kyle", "DeMarcino"));
 		expectedOP = "OrganizationalProfile[\n";
 		expectedOP += "   Jane Doe\n";
 		expectedOP += "   John Smith\n";
@@ -87,7 +98,41 @@ public class HumanResourcesManagerTest {
 		expectedOP += "   Suzanne Meadows\n";
 		expectedOP += "   Jessica Daniels";
 		expectedOP += "\n]";
-		expectedR = "R040123346, 1, B R829476581, 1, A, R000634703, 1, M, R228401745, 1, M, R891429182, 1, P, ";
+		assertEquals(expectedOP, hrm.generateOrganizationalProfile());
+		expectedR = "R040123346, 1, B R829476581, 1, A, R000634703, 1, M, R228401745, 1, "
+				+ "M, R891429182, 1, P, ";
+		assertEquals(expectedR, hrm.getResumeTree().elementsInLevelOrder());
+		
+		hrm = new HumanResourcesManager(employeeFile2, resumeFile2);
+		expectedOP = "OrganizationalProfile[\n";
+		expectedOP += "   Jimmy Nguyen\n";
+		expectedOP += "   John Doe\n";
+		expectedOP += "   Jane Smith\n";
+		expectedOP += "   Adam Mada\n";
+		expectedOP += "   Sam Adams\n";
+		expectedOP += "   Mary Poppins\n";
+		expectedOP += "   Steve Harvey\n";
+		expectedOP += "   Chris Harvey\n";
+		expectedOP += "   Chris Harvey";
+		expectedOP += "\n]";
+		assertEquals(expectedOP, hrm.generateOrganizationalProfile());
+		expectedR = "R03, 2, A, R01, 1, N, R05, 2, M R07, 2, M, R00, 1, N, R02, 2, N, R04, "
+				+ "2, N, R06, 2, M, R08, 2, M, ";
+		assertEquals(expectedR, hrm.getResumeTree().elementsInLevelOrder());
+		assertEquals("Chris Harvey", hrm.removeEmployee("Jimmy", "Nguyen"));
+		expectedOP = "OrganizationalProfile[\n";
+		expectedOP += "   Chris Harvey\n";
+		expectedOP += "   John Doe\n";
+		expectedOP += "   Jane Smith\n";
+		expectedOP += "   Adam Mada\n";
+		expectedOP += "   Sam Adams\n";
+		expectedOP += "   Mary Poppins\n";
+		expectedOP += "   Steve Harvey\n";
+		expectedOP += "   Chris Harvey";
+		expectedOP += "\n]";
+		assertEquals(expectedOP, hrm.generateOrganizationalProfile());
+		expectedR = "R05, 2, M, R03, 2, A, R07, 2, M, R01, 1, N R02, 2, N, R04, 2, N, "
+				+ "R06, 2, M, R08, 2, M, ";
 		assertEquals(expectedR, hrm.getResumeTree().elementsInLevelOrder());
 	}
 

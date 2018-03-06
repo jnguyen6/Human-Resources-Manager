@@ -197,8 +197,8 @@ public class HumanResourcesManager {
 					currentNode = otherNode;
 					currentResume = otherResume;
 				} else if (currentNode.children.size() == otherNode.children.size()) {
-					if (currentResume.getHighestDegree().equals("N") && (!otherResume.getHighestDegree().equals("A"))
-						|| otherResume.getHighestDegree().equals("B") || otherResume.getHighestDegree().equals("M")) {
+					if (currentResume.getHighestDegree().equals("N") && (otherResume.getHighestDegree().equals("A")
+						|| otherResume.getHighestDegree().equals("B") || otherResume.getHighestDegree().equals("M"))) {
 						currentNode = otherNode;
 						currentResume = otherResume;
 					} else if (currentResume.getHighestDegree().compareTo(otherResume.getHighestDegree()) < 0
