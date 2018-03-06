@@ -14,7 +14,7 @@ public interface Dictionary<E> {
 	 * @param k the key to add to the list
 	 * @param e the element to add to the list
 	 */
-	void insert(E k, E e);
+	void insert(String k, E e);
 	
 	/**
 	 * Returns the element from the list based on the given key value.
@@ -22,7 +22,7 @@ public interface Dictionary<E> {
 	 * @param k the key value to search for
 	 * @return the element found or null if the element was not found
 	 */
-	E lookUp(E k);
+	E lookUp(String k);
 	
 	/**
 	 * Returns the size of the list.

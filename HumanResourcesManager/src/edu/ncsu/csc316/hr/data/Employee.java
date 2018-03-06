@@ -148,20 +148,11 @@ public class Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (firstName == null) {
-			if (other.firstName != null)
-				return false;
-		} else if (!firstName.equals(other.firstName))
+		if (!firstName.equals(other.firstName))
 			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
-				return false;
-		} else if (!lastName.equals(other.lastName))
+		if (!lastName.equals(other.lastName))
 			return false;
-		if (resumeID == null) {
-			if (other.resumeID != null)
-				return false;
-		} else if (!resumeID.equals(other.resumeID))
+		if (!resumeID.equals(other.resumeID))
 			return false;
 		return true;
 	}

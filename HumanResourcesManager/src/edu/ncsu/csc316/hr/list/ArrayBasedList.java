@@ -38,7 +38,7 @@ public class ArrayBasedList<E> implements List<E> {
 	 * @param e the element to add to the end of the array list
 	 */
 	@Override
-	public void insert(E k, E e) {
+	public void insert(String k, E e) {
 		//not used
 	}
 	
@@ -101,7 +101,7 @@ public class ArrayBasedList<E> implements List<E> {
 	 * @return the element found or null if the element is not found
 	 */
 	@Override
-	public E lookUp(E k) {
+	public E lookUp(String k) {
 		// not used
 		return null;
 	}

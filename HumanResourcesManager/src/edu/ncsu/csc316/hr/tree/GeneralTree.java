@@ -1,7 +1,9 @@
 package edu.ncsu.csc316.hr.tree;
 
+import edu.ncsu.csc316.hr.adt.Queue;
 import edu.ncsu.csc316.hr.adt.Tree;
 import edu.ncsu.csc316.hr.list.ArrayBasedList;
+import edu.ncsu.csc316.hr.list.LinkedList;
 
 /**
  * Class that represents the general tree data structure, which uses
@@ -48,7 +50,7 @@ public class GeneralTree<E> implements Tree<E> {
 	 * @return the key stored in the tree node
 	 * @throws NullPointerException if the given node is null
 	 */
-	public E getKey(Node node) {
+	public String getKey(Node node) {
 		if (node == null) {
 			throw new NullPointerException("The given node cannot be null.");
 		}
@@ -120,7 +122,7 @@ public class GeneralTree<E> implements Tree<E> {
 	 * @throws NullPointerException if the given key or element is null
 	 */
 	@Override
-	public void insert(E k, E e) {
+	public void insert(String k, E e) {
 		if (k == null || e == null) {
 			throw new NullPointerException("The key or element to add cannot be null.");
 		}
@@ -145,7 +147,7 @@ public class GeneralTree<E> implements Tree<E> {
 	 * @param pn the parent node to connect with the newly created node
 	 * @throws NullPointerException if the given key/element or parent node is null
 	 */
-	public void insert(E k, E e, Node pn) {
+	public void insert(String k, E e, Node pn) {
 		if (root == null) {
 			insert(k, e);
 		} else {
@@ -171,7 +173,7 @@ public class GeneralTree<E> implements Tree<E> {
 	 * @throws NullPointerException if the given key is null
 	 */
 	@Override
-	public E remove(E k) {
+	public E remove(String k) {
 		if (isEmpty()) {
 			throw new IllegalArgumentException("The tree is empty.");
 		}
@@ -201,6 +203,51 @@ public class GeneralTree<E> implements Tree<E> {
 	}
 	
 	/**
+	 * Removes and returns an element from the given node in the tree, given a key.
+	 * If the tree is empty, then an IllegalArgumentException is thrown. If the 
+	 * given key or node is null, then a NullPointerException is thrown.
+	 * 
+	 * @param k the key to remove the element from
+	 * @param node the current node to remove the element and key from
+	 * @return the removed element or null if there are no elements to remove
+	 * @throws IllegalArgumentException if the tree is empty
+	 * @throws NullPointerException if the given key or node is null
+	 */
+	public E remove(String k, Node node) {
+		if (isEmpty()) {
+			throw new IllegalArgumentException("The tree is empty.");
+		}
+		if (k == null) {
+			throw new NullPointerException("The given key cannot be null.");
+		}
+		if (node == null) {
+			throw new NullPointerException("The given node cannot be null.");
+		}
+		if (node == root) {
+			if (k.equals(node.key)) {
+				E removedVal = node.data;
+				if (node.children.size() == 0) {
+					root = null;
+				} else {
+					root = node.children.remove(size() - 1);
+				}
+				size--;
+				return removedVal;
+			}
+		} else {
+			for (int i = 0; i < node.parent.children.size(); i++) {
+				if (k.equals(node.parent.children.get(i).key)) {
+					E removedVal = node.parent.children.get(i).data;
+					node.parent.children.remove(i);
+					size--;
+					return removedVal;
+				}
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Sets the element of the given node to the given element and key. Returns
 	 * the element that was replaced. If the given key/element to set or the given 
 	 * node is null, then a NullPointerException is thrown. If the general
@@ -214,7 +261,7 @@ public class GeneralTree<E> implements Tree<E> {
 	 * null
 	 * @throws IllegalArgumentException if the general tree is empty
 	 */
-	public E setElement(E k, E e, Node node) {
+	public E setElement(String k, E e, Node node) {
 		if (isEmpty()) {
 			throw new IllegalArgumentException("The tree is empty.");
 		}
@@ -249,6 +296,38 @@ public class GeneralTree<E> implements Tree<E> {
 	}
 	
 	/**
+	 * Returns a string of all the elements in the tree through level order
+	 * traversal. This method is used to help see the shape and contents of
+	 * the 2 3 tree implementation. Note that the level-order traversal
+	 * algorithm is referenced from the CSC316 Tree lecture slides on page
+	 * 22, provided by Jason King.
+	 * 
+	 * @return the string representation of all the elements in the tree
+	 */
+	public String elementsInLevelOrder() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("");
+		Queue<Node> queue = new LinkedList<Node>();
+		if (root == null) {
+			return sb.toString();
+		} else {
+			queue.enqueue(root);
+		}
+		while (!queue.isEmpty()) {
+			Node currentNode = queue.dequeue();
+			sb.append(currentNode.data.toString());
+			sb.append(", ");
+			int num = 0;
+			while (num < currentNode.children.size()) {
+				queue.enqueue(currentNode.children.get(num));
+				num++;
+			}
+		}
+		return sb.toString();
+	}
+		
+	
+	/**
 	 * The inner class of the GeneralTree class that stores the key,
 	 * element, a reference to the parent node, and a collection of
 	 * child nodes.
@@ -258,7 +337,7 @@ public class GeneralTree<E> implements Tree<E> {
 	public class Node {
 		
 		/** The key that maps the element stored. */
-		public E key;
+		public String key;
 		/** The element stored in the tree node. */
 		public E data;
 		/** The reference to the parent node. */
@@ -274,7 +353,7 @@ public class GeneralTree<E> implements Tree<E> {
 		 * @param key the key to set to the tree node
 		 * @param data the element to set to the tree node
 		 */
-		public Node(E key, E data) {
+		public Node(String key, E data) {
 			this(key, data, null, new ArrayBasedList<Node>());
 		}
 		
@@ -287,7 +366,7 @@ public class GeneralTree<E> implements Tree<E> {
 		 * @param parent the parent node reference to set
 		 * @param children the collection of child node references to set
 		 */
-		public Node(E key, E data, Node parent, ArrayBasedList<Node> children) {
+		public Node(String key, E data, Node parent, ArrayBasedList<Node> children) {
 			this.key = key;
 			this.data = data;
 			this.parent = parent;

@@ -48,7 +48,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	 * @throws NullPointerException if the given key or element is null
 	 */
 	@Override
-	public void insert(E k, E e) {
+	public void insert(String k, E e) {
 		if (k == null || e == null) {
 			throw new NullPointerException("The key or element to add cannot be null.");
 		}
@@ -72,7 +72,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	 * @param pn the parent node
 	 * @throws IllegalArgumentException if the given key is a duplicate
 	 */
-	public void insert(E k, E e, Node pn) {
+	public void insert(String k, E e, Node pn) {
 		//If there is an overflow, then perform the split operation
 		if (isLeaf(pn) && pn.keys[1] != null) {
 			split(k, e, pn);
@@ -120,7 +120,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	 * @param e the element to add to the binary search tree
 	 * @param pn the parent node
 	 */
-	public void split(E k, E e, Node pn) {
+	public void split(String k, E e, Node pn) {
 		if (k.compareTo(pn.keys[0]) == 0 || (pn.keys[1] != null && k.compareTo(pn.keys[1]) == 0)) {
 			throw new IllegalArgumentException("The given key is a duplicate.");
 		}
@@ -233,7 +233,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	 * @throws NullPointerException if the given key is null
 	 */
 	@Override
-	public E remove(E k) {
+	public E remove(String k) {
 		if (k == null) {
 			throw new NullPointerException("The given key cannot be null.");
 		}
@@ -258,7 +258,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	 * @param node the current node
 	 * @return the removed element or null if the element was not found
 	 */
-	public E remove(E k, Node node) {
+	public E remove(String k, Node node) {
 		if (node == null) {
 			return null;
 		}
@@ -872,7 +872,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	 * @throws NullPointerException if the given key is null
 	 */
 	@Override
-	public E lookUp(E k) {
+	public E lookUp(String k) {
 		if (k == null) {
 			throw new NullPointerException("The given key cannot be null.");
 		}
@@ -892,7 +892,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	 * @param node the current node
 	 * @return the element found or null if the element was not found
 	 */
-	public E lookUp(E k, Node node) {
+	public E lookUp(String k, Node node) {
 		if (node == null) {
 			return null;
 		} else if (k.compareTo(node.keys[0]) == 0) {
@@ -980,12 +980,12 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 		while (!queue.isEmpty()) {
 			Node currentNode = queue.dequeue();
 			if (currentNode.data[1] != null) {
-				sb.append(currentNode.data[0]);
+				sb.append(currentNode.data[0].toString());
 				sb.append(" ");
-				sb.append(currentNode.data[1]);
+				sb.append(currentNode.data[1].toString());
 				sb.append(", ");
 			} else {
-				sb.append(currentNode.data[0]);
+				sb.append(currentNode.data[0].toString());
 				sb.append(", ");
 			}
 			if (currentNode.left != null) {
@@ -1011,7 +1011,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	private class Node {
 		
 		/** The collection of keys that maps the elements stored. */
-		private E[] keys;
+		private String[] keys;
 		/** The elements stored in the tree node. */
 		private E[] data;
 		/** The reference to the parent node. */
@@ -1031,7 +1031,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 		 * @param key the key to set to the tree node
 		 * @param data the element to set to the tree node
 		 */
-		public Node(E k, E e) {
+		public Node(String k, E e) {
 			this(k, e, null, null, null, null);
 		}
 		
@@ -1047,8 +1047,9 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 		 * @param right the right child node reference to set
 		 */
 		@SuppressWarnings("unchecked")
-		public Node(E k, E e, Node parent, Node left, Node middle, Node right) {
-			keys = (E[]) (new Comparable[MAX_NUM_KEYS]);
+		public Node(String k, E e, Node parent, Node left, Node middle, Node right) {
+//			keys = (E[]) (new Comparable[MAX_NUM_KEYS]);
+			keys = new String[MAX_NUM_KEYS];
 			data = (E[]) (new Comparable[MAX_NUM_KEYS]);
 			keys[0] = k;
 			data[0] = e;

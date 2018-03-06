@@ -14,7 +14,7 @@ public interface Tree<E> {
 	 * @param k the key to add to the tree
 	 * @param e the element to add to the tree
 	 */
-	void insert(E k, E e);
+	void insert(String k, E e);
 	
 	/**
 	 * Removes and returns an element from the tree, given a key.
@@ -22,7 +22,7 @@ public interface Tree<E> {
 	 * @param k the key to remove the element from
 	 * @return the removed element
 	 */
-	E remove(E k);
+	E remove(String k);
 	
 	/**
 	 * Returns the size of the tree.

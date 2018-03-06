@@ -129,6 +129,21 @@ public class ResumeTest {
 		assertFalse(r.equals(r2));
 		assertFalse(r.equals(r3));
 		assertFalse(r.equals(r4));
+		assertFalse(r.equals(null));
+	}
+	
+	/**
+	 * Tests the compareTo() method.
+	 */
+	@Test
+	public void testCompareTo() {
+		Resume r = new Resume("R001", 1, "N");
+		Resume r2 = new Resume("R002", 1, "N");
+		Resume r3 = new Resume("R001", 2, "N");
+		assertTrue(r.compareTo(r) == 0);
+		assertTrue(r.compareTo(r2) < 0);
+		assertTrue(r.compareTo(r3) == 0);
+		assertTrue(r2.compareTo(r3) > 0);
 	}
 
 }

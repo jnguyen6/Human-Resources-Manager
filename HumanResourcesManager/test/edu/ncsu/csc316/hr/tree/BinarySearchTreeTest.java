@@ -909,6 +909,16 @@ public class BinarySearchTreeTest {
 		expected = "mango, cherry, ugli, banana, kale lemon, raspberry tomato, yam, apple, celery, "
 				+ "date, kelp, lime, quince, squash, turnip, xigua, zucchini, ";
 		assertEquals(expected, bst.elementsInLevelOrder());
+		
+		bst = new BinarySearchTree<String>();
+		bst.insert("A", "apple");
+		bst.insert("B", "banana");
+		bst.insert("C", "cherry");
+		assertEquals(3, bst.size());
+		assertEquals("banana, apple, cherry, ", bst.elementsInLevelOrder());
+		assertEquals("banana", bst.remove("B"));
+		assertEquals(2, bst.size());
+		assertEquals("apple cherry, ", bst.elementsInLevelOrder());
 	}
 
 	/**

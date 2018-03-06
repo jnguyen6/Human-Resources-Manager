@@ -7,7 +7,7 @@ package edu.ncsu.csc316.hr.data;
  * 
  * @author Jimmy Nguyen
  */
-public class Resume {
+public class Resume implements Comparable<Resume> {
 
 	/** The resume ID. */
 	private String resumeID;
@@ -151,20 +151,24 @@ public class Resume {
 		if (getClass() != obj.getClass())
 			return false;
 		Resume other = (Resume) obj;
-		if (highestDegree == null) {
-			if (other.highestDegree != null)
-				return false;
-		} else if (!highestDegree.equals(other.highestDegree))
+		if (!highestDegree.equals(other.highestDegree))
 			return false;
-		if (resumeID == null) {
-			if (other.resumeID != null)
-				return false;
-		} else if (!resumeID.equals(other.resumeID))
+		if (!resumeID.equals(other.resumeID))
 			return false;
 		if (yearsOfService != other.yearsOfService)
 			return false;
 		return true;
 	}
-	
-	
+
+	/**
+	 * Compares this Resume object with the given Resume object based on resume IDs.
+	 * If this resume ID is less than, equal to, or greater than the other resume ID,
+	 * then a negative value, 0, or a positive value is returned.
+	 * 
+	 * @param other the given Resume object to compare
+	 */
+	@Override
+	public int compareTo(Resume other) {
+		return this.resumeID.compareTo(other.resumeID);
+	}
 }

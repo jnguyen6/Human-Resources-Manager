@@ -241,6 +241,28 @@ public class GeneralTreeTest {
 		assertEquals("grape", gt.getElement(gt.getChildren(gt.root()).get(1)));
 		assertEquals("starch", gt.getKey(gt.getChildren(gt.root().children.get(0)).get(0)));
 		assertEquals("corn", gt.getElement(gt.getChildren(gt.root().children.get(0)).get(0)));
+		
+		gt = new GeneralTree<String>();
+		gt.insert("A", "apple", gt.root());
+		assertEquals(1, gt.size());
+		assertEquals("A", gt.getKey(gt.root()));
+		assertEquals("apple", gt.getElement(gt.root()));
+		assertEquals("apple, ", gt.elementsInLevelOrder());
+		gt.insert("B", "banana", gt.root());
+		assertEquals(2, gt.size());
+		assertEquals("B", gt.root().children.get(0).key);
+		assertEquals("banana", gt.root().children.get(0).data);
+		assertEquals("apple, banana, ", gt.elementsInLevelOrder());
+		gt.insert("C", "cranberry", gt.root().children.get(0));
+		assertEquals(3, gt.size());
+		assertEquals("C", gt.root().children.get(0).children.get(0).key);
+		assertEquals("cranberry", gt.root().children.get(0).children.get(0).data);
+		assertEquals("apple, banana, cranberry, ", gt.elementsInLevelOrder());
+		gt.insert("D", "date", gt.root());
+		assertEquals(4, gt.size());
+		assertEquals("D", gt.root().children.get(1).key);
+		assertEquals("date", gt.root().children.get(1).data);
+		assertEquals("apple, banana, date, cranberry, ", gt.elementsInLevelOrder());
 	}
 
 	/**
@@ -287,6 +309,55 @@ public class GeneralTreeTest {
 		assertEquals(2, gt.size());
 		assertEquals(1, gt.numChildren(gt.root()));
 		assertEquals("starch", gt.getKey(gt.getChildren(gt.root()).get(0)));
+		
+		gt = new GeneralTree<String>();
+		try {
+			gt.remove("A", null);
+			fail();
+		} catch (IllegalArgumentException iae) {
+			assertEquals("The tree is empty.", iae.getMessage());
+			assertEquals(0, gt.size());
+		}
+		gt.insert("A", "apple");
+		assertEquals(1, gt.size());
+		assertEquals("A", gt.getKey(gt.root()));
+		assertEquals("apple", gt.getElement(gt.root()));
+		try {
+			gt.remove(null, gt.root());
+			fail();
+		} catch (NullPointerException npe) {
+			assertEquals("The given key cannot be null.", npe.getMessage());
+			assertEquals(1, gt.size());
+			assertEquals("A", gt.getKey(gt.root()));
+			assertEquals("apple", gt.getElement(gt.root()));
+		}
+		try {
+			gt.remove("A", null);
+			fail();
+		} catch (NullPointerException npe) {
+			assertEquals("The given node cannot be null.", npe.getMessage());
+			assertEquals(1, gt.size());
+			assertEquals("A", gt.getKey(gt.root()));
+			assertEquals("apple", gt.getElement(gt.root()));
+		}
+		
+		assertEquals("apple", gt.remove("A", gt.root()));
+		assertEquals(0, gt.size());
+		assertNull(gt.root());
+		
+		gt.insert("A", "apple");
+		gt.insert("B", "banana", gt.root());
+		gt.insert("C", "cranberry", gt.root().children.get(0));
+		gt.insert("D", "date", gt.root());
+		assertEquals(4, gt.size());
+		assertEquals(2, gt.root().children.size());
+		assertEquals(1, gt.root().children.get(0).children.size());
+		assertEquals("apple, banana, date, cranberry, ", gt.elementsInLevelOrder());
+		assertEquals("date", gt.remove("D", gt.root().children.get(1)));
+		assertEquals(3, gt.size());
+		assertEquals(1, gt.root().children.size());
+		assertEquals(1, gt.root().children.get(0).children.size());
+		assertEquals("apple, banana, cranberry, ", gt.elementsInLevelOrder());
 	}
 	
 	/**

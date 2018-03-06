@@ -7,7 +7,9 @@ import edu.ncsu.csc316.hr.adt.Queue;
 import edu.ncsu.csc316.hr.adt.Tree;
 import edu.ncsu.csc316.hr.data.Resume;
 import edu.ncsu.csc316.hr.io.EmployeeReader;
+import edu.ncsu.csc316.hr.io.ResumeReader;
 import edu.ncsu.csc316.hr.list.LinkedList;
+import edu.ncsu.csc316.hr.tree.BinarySearchTree;
 import edu.ncsu.csc316.hr.tree.GeneralTree;
 import edu.ncsu.csc316.hr.tree.GeneralTree.Node;
 import edu.ncsu.csc316.hr.data.Employee;
@@ -42,6 +44,11 @@ public class HumanResourcesManager {
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("There was a problem reading the input file.");
 		}
+	    try {
+	    	    resumeTree = ResumeReader.readResumeInformation(pathToResumeFile);
+	    } catch (FileNotFoundException e) {
+	    	    throw new IllegalArgumentException("There was a problem reading the input file.");
+	    }
 	    buildTree(employeeInfo);
 	}
 	
@@ -60,7 +67,7 @@ public class HumanResourcesManager {
 		String input = employeeInfo.dequeue();
 		String[] info = input.split(", ");
 		Employee employee = new Employee(info[0], info[1], info[2]);
-		employeeTree.insert(employee, employee);
+		employeeTree.insert(employee.getResumeID(), employee);
 		//Now, discard the first "("
 		employeeInfo.dequeue();
 		appendNodesToTree(((GeneralTree<Employee>) employeeTree).root(), employeeInfo);
@@ -96,7 +103,7 @@ public class HumanResourcesManager {
 			if (!input.equals("(") && !input.equals(")")) {
 				String[] info = input.split(", ");
 				Employee employee = new Employee(info[0], info[1], info[2]);
-				((GeneralTree<Employee>) employeeTree).insert(employee, employee, n);
+				((GeneralTree<Employee>) employeeTree).insert(employee.getResumeID(), employee, n);
 				appendNodesToTree(n, employeeInfo);
 			}
 		}
@@ -111,8 +118,116 @@ public class HumanResourcesManager {
 	 * @return the name of the employee who was promoted to interim supervisor
 	 */
 	public String removeEmployee(String first, String last) {
-	    // TODO Add your code here
-		return null;
+		String interim = removeEmployee(((GeneralTree<Employee>) employeeTree).root(), first, last);
+		//If null is returned, that means that we did not find the employee
+		//to remove.
+		if (interim == null) {
+			return "Employee was not found.";
+		}
+	    return interim;
+	}
+	
+	/**
+	 * A recursive algorithm that helps find the employee to remove, given the first
+	 * and last name of the employee. If the employee to remove is found, then the
+	 * chooseInterim recursive algorithm is called to replace the removed employee.
+	 * Returns the interim employee that replaces the removed employee, or null if
+	 * the interim employee was not found.
+	 * 
+	 * @param node the current node to find the employee information
+	 * @param first the first name of the employee to remove
+	 * @param last the last name of the employee to remove
+	 * @return the employee information to be removed or null if the employee
+	 * was not found
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String removeEmployee(Node node, String first, String last) {
+		if (((Employee) node.data).getFirstName().equals(first) && 
+				((Employee) node.data).getLastName().equals(last)) {
+			((BinarySearchTree<Resume>) resumeTree).remove(node.key);
+			
+			//If we have found the employee to remove, then call chooseInterim
+			//recursive method. Doing so should replace the node that previously
+			//contains the removed employee info with the interim employee info
+			
+			//If the node we found has no children, that means that the
+			//employee we want to remove does not have any interim
+			//employees. Therefore, return null.
+			if (node.children.size() == 0) {
+				((GeneralTree<Employee>) employeeTree).remove(node.key, node);
+				return "The employee " + ((Employee) node.data).toString() + " had no employees"
+						+ " to supervise.";
+			}
+			chooseInterim(node);
+			String interim = ((Employee) node.data).toString();
+			return interim;
+		} else {
+			int min = 0;
+			int max = node.children.size() - 1;
+			while (min <= max) {
+				String interim = removeEmployee((Node) node.children.get(min), first, last);
+				if (interim != null) {
+					return interim;
+				}
+				min++;
+			}
+			return null;
+		}
+	}
+	
+	/**
+	 * A recursive algorithm that helps determine the interim employee to
+	 * replace the removed employee.
+	 * 
+	 * @param node the current node to find the interim employee for
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void chooseInterim(Node node) { 
+		//Node n represents one possible node that has the interim employee
+		Node currentNode = (Node) node.children.get(0);
+		Resume currentResume = resumeTree.lookUp(((Employee) currentNode.data).getResumeID());
+		for (int i = 1; i < node.children.size(); i++) {
+			Node otherNode = (Node) node.children.get(i);
+			Resume otherResume = resumeTree.lookUp(((Employee) otherNode.data).getResumeID());
+			if (currentResume.getYearsOfService() < otherResume.getYearsOfService()) {
+				currentNode = otherNode;
+				currentResume = otherResume;
+			} else if (currentResume.getYearsOfService() == otherResume.getYearsOfService()) {
+				if (currentNode.children.size() < otherNode.children.size()) {
+					currentNode = otherNode;
+					currentResume = otherResume;
+				} else if (currentNode.children.size() == otherNode.children.size()) {
+					if (currentResume.getHighestDegree().equals("N") && (!otherResume.getHighestDegree().equals("A"))
+						|| otherResume.getHighestDegree().equals("B") || otherResume.getHighestDegree().equals("M")) {
+						currentNode = otherNode;
+						currentResume = otherResume;
+					} else if (currentResume.getHighestDegree().compareTo(otherResume.getHighestDegree()) < 0
+							&& !otherResume.getHighestDegree().equals("N")) {
+						currentNode = otherNode;
+						currentResume = otherResume;
+					} else if (currentResume.getHighestDegree().equals(otherResume.getHighestDegree())) {
+						if (((Employee) currentNode.data).getLastName().
+								compareTo(((Employee) otherNode.data).getLastName()) > 0) {
+							currentNode = otherNode;
+							currentResume = otherResume;
+						} else if (((Employee) currentNode.data).getLastName().
+								equals(((Employee) otherNode.data).getLastName())) {
+							if (((Employee) currentNode.data).getFirstName().
+									compareTo(((Employee) otherNode.data).getFirstName()) > 0) {
+								currentNode = otherNode;
+								currentResume = otherResume;
+							}
+						}
+					}
+				}
+			}
+		}
+		((GeneralTree<Employee>) employeeTree).setElement(currentNode.key, (Employee) currentNode.data, node);
+		if (currentNode.children.size() != 0) {
+			chooseInterim(currentNode);
+		} else {
+			((GeneralTree<Employee>) employeeTree).remove(currentNode.key, currentNode);
+		}
 	}
 	
 	/**
@@ -146,5 +261,14 @@ public class HumanResourcesManager {
 		}
 		sb.append("\n]");
 		return sb.toString();
+	}
+	
+	/**
+	 * Returns the resume tree.
+	 * 
+	 * @return the resume tree.
+	 */
+	public BinarySearchTree<Resume> getResumeTree() {
+		return (BinarySearchTree<Resume>) resumeTree;
 	}
 }
