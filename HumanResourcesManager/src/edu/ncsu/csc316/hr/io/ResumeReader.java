@@ -32,9 +32,14 @@ public class ResumeReader {
 		//Discard header
 		fileScanner.nextLine();
 		while (fileScanner.hasNextLine()) {
-			String[] resumeInfo = fileScanner.nextLine().split(", ");
-			Resume r = new Resume(resumeInfo[0], Integer.parseInt(resumeInfo[1]), resumeInfo[2]);
+//			String[] resumeInfo = fileScanner.nextLine().split(", ");
+			String resumeInfo = fileScanner.nextLine();
+			Scanner lineScanner = new Scanner(resumeInfo);
+			lineScanner.useDelimiter(", ");
+			Resume r = new Resume(lineScanner.next(), Integer.parseInt(lineScanner.next()), lineScanner.next());
+//			Resume r = new Resume(resumeInfo[0], Integer.parseInt(resumeInfo[1]), resumeInfo[2]);
 			resumeTree.insert(r.getResumeID(), r);
+			lineScanner.close();
 		}
 		fileScanner.close();
 		return resumeTree;
