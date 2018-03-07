@@ -32,7 +32,10 @@ public class EmployeeReader {
 		//Essentially, we want to move each input line from the file as a separate element to
 		//add to the linked list queue implementation
 		while (fileScanner.hasNextLine()) {
-			employeeInfo.enqueue(fileScanner.nextLine().trim());
+			String input = fileScanner.nextLine();
+			if (!input.equals("")) {
+				employeeInfo.enqueue(input.trim());
+			}
 		}
 		fileScanner.close();
 		return employeeInfo;

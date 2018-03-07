@@ -65,8 +65,8 @@ public class HumanResourcesManager {
 		//remove the first employee info and assign that as the root of the
 		//general tree
 		String input = employeeInfo.dequeue();
-		String[] info = input.split(", ");
-		Employee employee = new Employee(info[0], info[1], info[2]);
+		String[] info = input.split(",");
+		Employee employee = new Employee(info[0].trim(), info[1].trim(), info[2].trim());
 		employeeTree.insert(employee.getResumeID(), employee);
 		//Now, discard the first "("
 		employeeInfo.dequeue();
