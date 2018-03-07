@@ -61,7 +61,7 @@ public class HumanResourcesManager {
 	 * employee information file
 	 */
 	public void buildTree(LinkedList<String> employeeInfo) {
-		//Assumming that the given employee info list is correctly formatted,
+		//Assuming that the given employee info list is correctly formatted,
 		//remove the first employee info and assign that as the root of the
 		//general tree
 		String input = employeeInfo.dequeue();
@@ -101,8 +101,8 @@ public class HumanResourcesManager {
 			}
 			//If the input is an employee info, then proceed to process and append to tree.
 			if (!input.equals("(") && !input.equals(")")) {
-				String[] info = input.split(", ");
-				Employee employee = new Employee(info[0], info[1], info[2]);
+				String[] info = input.split(",");
+				Employee employee = new Employee(info[0].trim(), info[1].trim(), info[2].trim());
 				((GeneralTree<Employee>) employeeTree).insert(employee.getResumeID(), employee, n);
 				appendNodesToTree(n, employeeInfo);
 			}
