@@ -85,27 +85,39 @@ public class HumanResourcesManager {
 	public void appendNodesToTree(Node n, LinkedList<String> employeeInfo) {
 		//The check to whether the employee linked list is empty is to make sure
 		//we have an indication of where to end the building tree process.
-		if (!employeeInfo.isEmpty()) {
+		Node currentNode = (Node) n;
+		while (!employeeInfo.isEmpty()) {
 			String input = employeeInfo.dequeue();
-			//If "(", then create new list of children specifically for the new parent node.
-			//The new parent node would be the most recently added child node of the previous
-			//parent node, which should be at the end of the list of children nodes.
 			if (input.equals("(")) {
-				Node parentNode = (Node) n.children.get(n.children.size() - 1);
-				appendNodesToTree(parentNode, employeeInfo);
+				currentNode = (Node) currentNode.children.get(currentNode.children.size() - 1);
 			}
-			//If ")", then call appendNodesToTree, with the parent of the current parent node.
 			if (input.equals(")")) {
-				Node parentNode = (Node) n.parent;
-				appendNodesToTree(parentNode, employeeInfo);
+				currentNode = (Node) currentNode.parent;
 			}
-			//If the input is an employee info, then proceed to process and append to tree.
 			if (!input.equals("(") && !input.equals(")")) {
 				String[] info = input.split(",");
 				Employee employee = new Employee(info[0].trim(), info[1].trim(), info[2].trim());
-				((GeneralTree<Employee>) employeeTree).insert(employee.getResumeID(), employee, n);
-				appendNodesToTree(n, employeeInfo);
+				((GeneralTree<Employee>) employeeTree).insert(employee.getResumeID(), employee, currentNode);
 			}
+//			//If "(", then create new list of children specifically for the new parent node.
+//			//The new parent node would be the most recently added child node of the previous
+//			//parent node, which should be at the end of the list of children nodes.
+//			if (input.equals("(")) {
+//				Node parentNode = (Node) n.children.get(n.children.size() - 1);
+//				appendNodesToTree(parentNode, employeeInfo);
+//			}
+//			//If ")", then call appendNodesToTree, with the parent of the current parent node.
+//			if (input.equals(")")) {
+//				Node parentNode = (Node) n.parent;
+//				appendNodesToTree(parentNode, employeeInfo);
+//			}
+//			//If the input is an employee info, then proceed to process and append to tree.
+//			if (!input.equals("(") && !input.equals(")")) {
+//				String[] info = input.split(",");
+//				Employee employee = new Employee(info[0].trim(), info[1].trim(), info[2].trim());
+//				((GeneralTree<Employee>) employeeTree).insert(employee.getResumeID(), employee, n);
+//				appendNodesToTree(n, employeeInfo);
+//			}
 		}
 	}
 	
