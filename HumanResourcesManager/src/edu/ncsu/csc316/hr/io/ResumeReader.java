@@ -33,7 +33,7 @@ public class ResumeReader {
 		fileScanner.nextLine();
 		while (fileScanner.hasNextLine()) {
 //			String[] resumeInfo = fileScanner.nextLine().split(", ");
-			String resumeInfo = fileScanner.nextLine();
+			String resumeInfo = fileScanner.nextLine().trim();
 			if (!resumeInfo.equals("")) {
 				Scanner lineScanner = new Scanner(resumeInfo);
 				lineScanner.useDelimiter(", ");
