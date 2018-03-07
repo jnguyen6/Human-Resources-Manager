@@ -35,13 +35,13 @@ public class ResumeReader {
 			String resumeInfo = fileScanner.nextLine().trim();
 			if (!resumeInfo.equals("")) {
 				Scanner lineScanner = new Scanner(resumeInfo);
-				lineScanner.useDelimiter(", ");
+				lineScanner.useDelimiter(",");
 				String resumeID = "";
 				int yearsOfService = -1;
 				String highestDegree = "";
-				resumeID = lineScanner.next();
-				yearsOfService = lineScanner.nextInt();
-				highestDegree = lineScanner.next();
+				resumeID = lineScanner.next().trim();
+				yearsOfService = Integer.parseInt(lineScanner.next().trim());
+				highestDegree = lineScanner.next().trim();
 				Resume r = new Resume(resumeID, yearsOfService, highestDegree);
 				resumeTree.insert(r.getResumeID(), r);
 				lineScanner.close();
