@@ -32,29 +32,17 @@ public class ResumeReader {
 		//Discard header
 		fileScanner.nextLine();
 		while (fileScanner.hasNextLine()) {
-//			String[] resumeInfo = fileScanner.nextLine().split(", ");
 			String resumeInfo = fileScanner.nextLine().trim();
 			if (!resumeInfo.equals("")) {
 				Scanner lineScanner = new Scanner(resumeInfo);
-				lineScanner.useDelimiter(",");
+				lineScanner.useDelimiter(", ");
 				String resumeID = "";
 				int yearsOfService = -1;
 				String highestDegree = "";
-				resumeID = lineScanner.next().trim();
-				yearsOfService = Integer.parseInt(lineScanner.next().trim());
-				highestDegree = lineScanner.next().trim();
-//				if (lineScanner.hasNext()) {
-//					resumeID = lineScanner.next().trim();
-//				}
-//				if (lineScanner.hasNext()) {
-//					yearsOfService = Integer.parseInt(lineScanner.next().trim());
-//				}
-//				if (lineScanner.hasNext()) {
-//					highestDegree = lineScanner.next().trim();
-//				}
+				resumeID = lineScanner.next();
+				yearsOfService = lineScanner.nextInt();
+				highestDegree = lineScanner.next();
 				Resume r = new Resume(resumeID, yearsOfService, highestDegree);
-//				Resume r = new Resume(lineScanner.next(), Integer.parseInt(lineScanner.next()), lineScanner.next());
-//				Resume r = new Resume(resumeInfo[0], Integer.parseInt(resumeInfo[1]), resumeInfo[2]);
 				resumeTree.insert(r.getResumeID(), r);
 				lineScanner.close();
 			}
