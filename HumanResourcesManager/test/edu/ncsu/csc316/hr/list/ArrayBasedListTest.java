@@ -104,6 +104,10 @@ public class ArrayBasedListTest {
 		assertEquals("pear", l.get(1));
 		assertEquals("apple", l.get(2));
 		assertEquals("plum", l.get(3));
+		
+		//Since the ArrayBasedList class does not use the insert method from the Dictionary
+		//ADT class, it is expected that the calling the insert method does nothing.
+		l.insert("A", "apple");
 	}
 
 	/**

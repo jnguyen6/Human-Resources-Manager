@@ -1,7 +1,5 @@
 package edu.ncsu.csc316.hr.list;
 
-import java.util.Comparator;
-
 import edu.ncsu.csc316.hr.adt.List;
 
 /**

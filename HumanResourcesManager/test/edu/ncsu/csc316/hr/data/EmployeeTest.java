@@ -136,7 +136,6 @@ public class EmployeeTest {
 		assertFalse(e.equals(e2));
 		assertFalse(e.equals(e3));
 		assertFalse(e.equals(e4));
-		assertFalse(e.equals(null));
 	}
 
 }

@@ -10,6 +10,7 @@ import edu.ncsu.csc316.hr.list.LinkedList;
  * the linked representation as the underlying data structure.
  * 
  * @author Jimmy Nguyen
+ * @param <E> the generic element type
  */
 public class GeneralTree<E> implements Tree<E> {
 

@@ -206,17 +206,13 @@ public class HumanResourcesManager {
 						currentNode = otherNode;
 						currentResume = otherResume;
 					} else if (currentResume.getHighestDegree().equals(otherResume.getHighestDegree())) {
-						if (((Employee) currentNode.data).getLastName().
-								compareTo(((Employee) otherNode.data).getLastName()) > 0) {
+						if (((Employee) currentNode.data).getLastName().compareTo(((Employee) otherNode.data).getLastName()) > 0) {
 							currentNode = otherNode;
 							currentResume = otherResume;
-						} else if (((Employee) currentNode.data).getLastName().
-								equals(((Employee) otherNode.data).getLastName())) {
-							if (((Employee) currentNode.data).getFirstName().
-									compareTo(((Employee) otherNode.data).getFirstName()) > 0) {
+						} else if (((Employee) currentNode.data).getLastName().equals(((Employee) otherNode.data).getLastName()) &&
+								((Employee) currentNode.data).getFirstName().compareTo(((Employee) otherNode.data).getFirstName()) > 0) {
 								currentNode = otherNode;
 								currentResume = otherResume;
-							}
 						}
 					}
 				}

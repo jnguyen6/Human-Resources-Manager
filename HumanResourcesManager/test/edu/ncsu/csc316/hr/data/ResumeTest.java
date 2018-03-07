@@ -129,7 +129,6 @@ public class ResumeTest {
 		assertFalse(r.equals(r2));
 		assertFalse(r.equals(r3));
 		assertFalse(r.equals(r4));
-		assertFalse(r.equals(null));
 	}
 	
 	/**

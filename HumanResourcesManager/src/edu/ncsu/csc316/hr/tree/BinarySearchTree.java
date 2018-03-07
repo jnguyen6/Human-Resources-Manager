@@ -14,8 +14,9 @@ import edu.ncsu.csc316.hr.list.LinkedList;
  * a generic type, which was referenced from the SortedArrayList
  * class from project 3 of CSC216. The authors of the class were
  * Austin Hyder and Jimmy Nguyen.
- * 
+ *
  * @author Jimmy Nguyen
+ * @param <E> the generic element type
  */
 public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>, Tree<E> {
 
