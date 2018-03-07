@@ -37,7 +37,20 @@ public class ResumeReader {
 			if (!resumeInfo.equals("")) {
 				Scanner lineScanner = new Scanner(resumeInfo);
 				lineScanner.useDelimiter(", ");
-				Resume r = new Resume(lineScanner.next(), Integer.parseInt(lineScanner.next()), lineScanner.next());
+				String resumeID = "";
+				int yearsOfService = -1;
+				String highestDegree = "";
+				if (lineScanner.hasNext()) {
+					resumeID = lineScanner.next();
+				}
+				if (lineScanner.hasNext()) {
+					yearsOfService = Integer.parseInt(lineScanner.next());
+				}
+				if (lineScanner.hasNext()) {
+					highestDegree = lineScanner.next();
+				}
+				Resume r = new Resume(resumeID, yearsOfService, highestDegree);
+//				Resume r = new Resume(lineScanner.next(), Integer.parseInt(lineScanner.next()), lineScanner.next());
 //				Resume r = new Resume(resumeInfo[0], Integer.parseInt(resumeInfo[1]), resumeInfo[2]);
 				resumeTree.insert(r.getResumeID(), r);
 				lineScanner.close();
