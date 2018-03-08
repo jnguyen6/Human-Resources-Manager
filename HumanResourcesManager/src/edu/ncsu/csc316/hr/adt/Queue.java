@@ -1,7 +1,7 @@
 package edu.ncsu.csc316.hr.adt;
 
 /**
- * Interface class that represents the Queue ADT.
+ * Interface class that represents the Queue abstract data type.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type
@@ -16,7 +16,7 @@ public interface Queue<E> {
 	void enqueue(E e);
 	
 	/**
-	 * Removes and returns an element at the beginning of the queue.
+	 * Removes and returns the element at the beginning of the queue.
 	 * 
 	 * @return the element removed at the beginning of the queue
 	 */

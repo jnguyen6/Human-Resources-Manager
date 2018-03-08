@@ -13,7 +13,7 @@ public class Resume implements Comparable<Resume> {
 	private String resumeID;
 	/** The number of service years. */
 	private int yearsOfService;
-	/** The highest degree completed. */
+	/** The highest degree earned. */
 	private String highestDegree;
 	
 	/**
@@ -79,19 +79,19 @@ public class Resume implements Comparable<Resume> {
 	}
 	
 	/**
-	 * Returns the highest degree completed.
+	 * Returns the highest degree earned.
 	 * 
-	 * @return the highest degree completed
+	 * @return the highest degree earned
 	 */
 	public String getHighestDegree() {
 		return highestDegree;
 	}
 	
 	/**
-	 * Sets the highest degree completed. If the given degree is null or an empty
+	 * Sets the highest degree earned. If the given degree is null or an empty
 	 * String, then an IllegalArgumentException is thrown.
 	 * 
-	 * @param highestDegree the highest degree completed to set
+	 * @param highestDegree the highest degree earned to set
 	 * @throws IllegalArgumentException if the given degree is null or an empty
 	 * String
 	 */
@@ -103,8 +103,8 @@ public class Resume implements Comparable<Resume> {
 	}
 	
 	/**
-	 * Creates and returns a String representation of the resume, which consists of
-	 * the resume ID, years of service, and highest degree completed.
+	 * Creates and returns a String representation of the resume, which consists
+	 * of the resume ID, years of service, and highest degree earned.
 	 * 
 	 * @return the String representation of the resume
 	 */

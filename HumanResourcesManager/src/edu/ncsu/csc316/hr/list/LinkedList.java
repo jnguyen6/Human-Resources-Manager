@@ -4,6 +4,7 @@ import edu.ncsu.csc316.hr.adt.Queue;
 
 /**
  * Class that represents a linked list with a front and a back reference.
+ * The LinkedList class is expected to behave like a Queue.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type
@@ -18,8 +19,8 @@ public class LinkedList<E> implements Queue<E> {
 	private int size;
 	
 	/**
-	 * Constructor that initializes the front and back fields to null and the size
-	 * field to 0.
+	 * Constructor that initializes the front and back fields to null and
+	 * the size field to 0.
 	 */
 	public LinkedList() {
 		front = null;
@@ -28,7 +29,7 @@ public class LinkedList<E> implements Queue<E> {
 	}
 	
 	/**
-	 * Adds an element to the end of the linked list. If the element
+	 * Adds an element at the end of the linked list. If the element
 	 * is null, then a NullPointerException is thrown.
 	 * 
 	 * @param e the element to add to the linked list
@@ -73,8 +74,9 @@ public class LinkedList<E> implements Queue<E> {
 	}
 
 	/**
-	 * Returns the element at the beginning of the linked list without removing
-	 * it. If the list is empty, then an IllegalArgumentException is thrown.
+	 * Returns the element at the beginning of the linked list without
+	 * removing it. If the list is empty, then an IllegalArgumentException
+	 * is thrown.
 	 * 
 	 * @return the element at the beginning of the list
 	 * @throws IllegalArgumentException if the list is empty
@@ -98,9 +100,9 @@ public class LinkedList<E> implements Queue<E> {
 	}
 
 	/**
-	 * Determines whether the linked list has any elements or not. If the list
-	 * is empty, then the method returns true. Otherwise, the method returns
-	 * false.
+	 * Determines whether the linked list has any elements or not. If
+	 * the list is empty, then the method returns true. Otherwise, the
+	 * method returns false.
 	 * 
 	 * @return true if the linked list is empty or false otherwise
 	 */
@@ -111,7 +113,9 @@ public class LinkedList<E> implements Queue<E> {
 	
 	/**
 	 * The inner class of the LinkedList class that stores an element in
-	 * a node and a reference to the next node in the list
+	 * a node and a reference to the next node in the list. Note that the
+	 * inner class is reused from the Node inner class from the CSC316
+	 * project 1.
 	 * 
 	 * @author Jimmy Nguyen
 	 */
@@ -123,9 +127,9 @@ public class LinkedList<E> implements Queue<E> {
 		public Node next;
 		
 		/**
-		 * Constructor that creates an instance of a Node, initializes the data 
-		 * field to the given parameter value, and initializes the next field to 
-		 * null.
+		 * Constructor that creates an instance of a Node, initializes the
+		 * data field to the given parameter value, and initializes the next
+		 * field to null.
 		 * 
 		 * @param data the element to set to the node
 		 */
@@ -134,8 +138,8 @@ public class LinkedList<E> implements Queue<E> {
 		}
 		
 		/**
-		 * Constructor that creates an instance of a Node and initializes the
-		 * data and next fields to the given parameter values.
+		 * Constructor that creates an instance of a Node and initializes
+		 * the data and next fields to the given parameter values.
 		 * 
 		 * @param data the element to set to the node
 		 * @param next the next node reference to set

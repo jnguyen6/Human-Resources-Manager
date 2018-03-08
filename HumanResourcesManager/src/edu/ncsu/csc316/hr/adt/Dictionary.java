@@ -9,15 +9,15 @@ package edu.ncsu.csc316.hr.adt;
 public interface Dictionary<E> {
 
 	/**
-	 * Adds an element and its corresponding key to the end of the list.
+	 * Adds an element and its corresponding key to the dictionary.
 	 * 
-	 * @param k the key to add to the list
-	 * @param e the element to add to the list
+	 * @param k the key to add to the dictionary
+	 * @param e the element to add to the dictionary
 	 */
 	void insert(String k, E e);
 	
 	/**
-	 * Returns the element from the list based on the given key value.
+	 * Returns the element from the dictionary based on the given key value.
 	 * 
 	 * @param k the key value to search for
 	 * @return the element found or null if the element was not found
@@ -25,9 +25,9 @@ public interface Dictionary<E> {
 	E lookUp(String k);
 	
 	/**
-	 * Returns the size of the list.
+	 * Returns the size of the dictionary.
 	 * 
-	 * @return the size of the list
+	 * @return the size of the dictionary
 	 */
 	int size();
 }

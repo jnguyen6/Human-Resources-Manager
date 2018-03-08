@@ -1,7 +1,7 @@
 package edu.ncsu.csc316.hr.adt;
 
 /**
- * Interface class that represents the Tree ADT.
+ * Interface class that represents the Tree abstract data type.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type

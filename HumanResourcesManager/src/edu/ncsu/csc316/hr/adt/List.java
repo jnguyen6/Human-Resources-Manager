@@ -1,8 +1,7 @@
 package edu.ncsu.csc316.hr.adt;
 
 /**
- * Interface class that extends from the Dictionary interface class.
- * Represents the List abstract data type.
+ * Interface class that represents the List abstract data type.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type
@@ -41,8 +40,8 @@ public interface List<E> extends Dictionary<E> {
 	E get(int index);
 	
 	/**
-	 * Replaces the element in the list with a new element at a specific index. 
-	 * Returns the element that was replaced.
+	 * Replaces the element in the list with a new element at a specific
+	 * index. Returns the element that was replaced.
 	 * 
 	 * @param index the index to set the element at
 	 * @param e the element to set in the list

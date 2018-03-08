@@ -9,7 +9,8 @@ import edu.ncsu.csc316.hr.tree.BinarySearchTree;
 
 /**
  * File reader class that reads a given file that contains resume
- * information and returns a collection of resumes from the file.
+ * information and returns a binary search tree containing resumes
+ * from the file.
  * 
  * @author Jimmy Nguyen
  */

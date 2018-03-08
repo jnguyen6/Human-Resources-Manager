@@ -7,20 +7,20 @@ import edu.ncsu.csc316.hr.list.LinkedList;
 
 /**
  * Class that represents the binary search tree data structure.
- * The binary search tree implements the 2-3 tree implementation
- * design, which is a generalization of the typical binary search
- * tree, and as such, maintains the typical search properties and
- * operations. Note that the generic type E extends Comparable of
- * a generic type, which was referenced from the SortedArrayList
- * class from project 3 of CSC216. The authors of the class were
- * Austin Hyder and Jimmy Nguyen.
+ * Specifically, the binary search tree uses the 2-3 tree 
+ * implementation design, which is a generalization of the typical
+ * binary search tree, and as such, maintains the typical search
+ * properties and operations. Note that the generic type E extends
+ * Comparable of a generic type, which was referenced from the
+ * SortedArrayList class from project 3 of CSC216. The authors of
+ * the class were Austin Hyder and Jimmy Nguyen.
  *
  * @author Jimmy Nguyen
  * @param <E> the generic element type
  */
 public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>, Tree<E> {
 
-	/** The maximum number of keys that can be in one node. */
+	/** The maximum number of keys one node can have. */
 	public static final int MAX_NUM_KEYS = 2;
 	
 	/** The reference to the root node of the binary search tree. */
@@ -292,20 +292,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 							} else {
 								transfer(successor.parent.left);
 							}
-						} //else if (successor.parent.middle.keys[0] == null) {
-//							if (successor.parent.left.keys[1] == null && 
-//									successor.parent.right.keys[1] == null) {
-//								fusion(successor.parent.middle);
-//							} else {
-//								transfer(successor.parent.middle);
-//							}
-//						} else if (successor.parent.right.keys[0] == null) {
-//							if (successor.parent.middle.keys[1] == null) {
-//								fusion(successor.parent.right);
-//							} else {
-//								transfer(successor.parent.right);
-//							}
-//						}
+						}
 					}
 				} else {
 					node.keys[0] = null;
@@ -371,13 +358,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 							} else {
 								transfer(successor.parent.left);
 							}
-						} //else if (successor.parent.right.keys[0] == null) {
-//							if (successor.parent.left.keys[1] == null) {
-//								fusion(successor.parent.right);
-//							} else {
-//								transfer(successor.parent.right);
-//							}
-//						}
+						}
 					} else {
 						if (successor.parent.left.keys[0] == null) {
 							if (successor.parent.middle.keys[1] == null) {
@@ -392,13 +373,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 							} else {
 								transfer(successor.parent.middle);
 							}
-						} //else if (successor.parent.right.keys[0] == null) {
-//							if (successor.parent.middle.keys[1] == null) {
-//								fusion(successor.parent.right);
-//							} else {
-//								transfer(successor.parent.right);
-//							}
-//						}
+						}
 					}
 				} else {
 					node.keys[0] = node.keys[1];
@@ -421,13 +396,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 							} else {
 								transfer(successor.parent.left);
 							}
-						} //else if (successor.parent.right.keys[0] == null) {
-//							if (successor.parent.left.keys[1] == null) {
-//								fusion(successor.parent.right);
-//							} else {
-//								transfer(successor.parent.right);
-//							}
-//						}
+						}
 					} else {
 						if (successor.parent.left.keys[0] == null) {
 							if (successor.parent.middle.keys[1] == null) {
@@ -435,13 +404,6 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 							} else {
 								transfer(successor.parent.left);
 							}
-//						} else if (successor.parent.middle.keys[0] == null) {
-//							if (successor.parent.left.keys[1] == null && 
-//									successor.parent.right.keys[1] == null) {
-//								fusion(successor.parent.middle);
-//							} else {
-//								transfer(successor.parent.middle);
-//							}
 						} else if (successor.parent.right.keys[0] == null) {
 							if (successor.parent.middle.keys[1] == null) {
 								fusion(successor.parent.right);
@@ -500,7 +462,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	
 	/**
 	 * A recursive algorithm that helps update the binary search tree
-	 * when an element and key to remove are found.
+	 * when an element and key to remove are found through fusion.
 	 * 
 	 * @param node the current node
 	 */
@@ -697,7 +659,7 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	
 	/**
 	 * A recursive algorithm that helps update the binary search tree
-	 * when an element and key to remove are found.
+	 * when an element and key to remove are found through transferring.
 	 * 
 	 * @param node the current node
 	 */
@@ -886,8 +848,8 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	
 	/**
 	 * A recursive algorithm that searches for the element based on the given
-	 * key value and returns the element from the binary search tree Returns null
-	 * if the element was not found.
+	 * key value and returns the element from the binary search tree. Returns
+	 * null if the element was not found.
 	 * 
 	 * @param k the key value to search for
 	 * @param node the current node
@@ -961,13 +923,13 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 	}
 	
 	/**
-	 * Returns a string of all the elements in the tree through level order
+	 * Returns a String of all the elements in the tree through level order
 	 * traversal. This method is used to help see the shape and contents of
 	 * the 2 3 tree implementation. Note that the level-order traversal
 	 * algorithm is referenced from the CSC316 Tree lecture slides on page
 	 * 22, provided by Jason King.
 	 * 
-	 * @return the string representation of all the elements in the tree
+	 * @return the String representation of all the elements in the tree
 	 */
 	public String elementsInLevelOrder() {
 		StringBuilder sb = new StringBuilder();
@@ -1049,7 +1011,6 @@ public class BinarySearchTree<E extends Comparable<E>> implements Dictionary<E>,
 		 */
 		@SuppressWarnings("unchecked")
 		public Node(String k, E e, Node parent, Node left, Node middle, Node right) {
-//			keys = (E[]) (new Comparable[MAX_NUM_KEYS]);
 			keys = new String[MAX_NUM_KEYS];
 			data = (E[]) (new Comparable[MAX_NUM_KEYS]);
 			keys[0] = k;

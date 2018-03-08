@@ -3,7 +3,9 @@ package edu.ncsu.csc316.hr.list;
 import edu.ncsu.csc316.hr.adt.List;
 
 /**
- * Class that uses an array as the underlying data structure.
+ * Class that uses an array as the underlying data structure. Note that
+ * the ArrayBasedList class is reused from the class made by me from the
+ * previous CSC316 project 1.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type

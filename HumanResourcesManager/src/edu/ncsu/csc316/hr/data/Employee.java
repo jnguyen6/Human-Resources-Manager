@@ -16,8 +16,8 @@ public class Employee {
 	private String resumeID;
 	
 	/**
-	 * Constructor that initializes the first name, last name, and resume ID fields
-	 * to the given parameter values.
+	 * Constructor that initializes the first name, last name, and resume
+	 * ID fields to the given parameter values.
 	 * 
 	 * @param firstName the first name of the employee
 	 * @param lastName the last name of the employee
@@ -63,10 +63,10 @@ public class Employee {
 	}
 	
 	/**
-	 * Sets the last name of the employee. If the given lasst name is null
+	 * Sets the last name of the employee. If the given last name is null
 	 * or an empty String, then an IllegalArgumentException is thrown.
 	 * 
-	 * @param lastName the last name of the employee to seet
+	 * @param lastName the last name of the employee to set
 	 * @throws IllegalArgumentException if the given last name is null
 	 * or an empty String
 	 */
@@ -102,7 +102,7 @@ public class Employee {
 	}
 	
 	/**
-	 * Creates and returns a String representation of the employee. The String
+	 * Creates and returns a String representation of the employee, which
 	 * will consist of the employee's first and last name.
 	 * 
 	 * @return the String representation of the employee

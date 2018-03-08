@@ -23,7 +23,7 @@ import edu.ncsu.csc316.hr.data.Employee;
  */
 public class HumanResourcesManager {
 
-	/** A search tree that contains resume information. */
+	/** A binary search tree that contains resume information. */
 	private Dictionary<Resume> resumeTree;
 	/** A general tree that contains employee information. */
 	private Tree<Employee> employeeTree;
@@ -53,12 +53,12 @@ public class HumanResourcesManager {
 	}
 	
 	/**
-	 * Builds the general tree, in which the shape of the tree is determined by
-	 * the ordering specifically defined in the given list of input lines taken
-	 * from the employee information file.
+	 * Builds the general tree, in which the shape of the tree is
+	 * determined by the ordering specifically defined in the given
+	 * list of input lines taken from the employee information file.
 	 * 
-	 * @param employeeInfo the list representation of each input line from the
-	 * employee information file
+	 * @param employeeInfo the list representation of each input line
+	 * from the employee information file
 	 */
 	public void buildTree(LinkedList<String> employeeInfo) {
 		//Assuming that the given employee info list is correctly formatted,
@@ -74,12 +74,12 @@ public class HumanResourcesManager {
 	}
 	
 	/**
-	 * A recursive algorithm that helps build the general tree of employee 
+	 * An algorithm that helps build the general tree of employee 
 	 * information.
 	 * 
 	 * @param n the current parent node
-	 * @param employeeInfo the list representation of each input line from the
-	 * employee information file
+	 * @param employeeInfo the list representation of each input
+	 * line from the employee information file
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void appendNodesToTree(Node n, LinkedList<String> employeeInfo) {
@@ -88,36 +88,22 @@ public class HumanResourcesManager {
 		Node currentNode = (Node) n;
 		while (!employeeInfo.isEmpty()) {
 			String input = employeeInfo.dequeue();
+			//If "(", then create new list of children specifically for the new parent node.
+			//The new parent node would be the most recently added child node of the previous
+			//parent node, which should be at the end of the list of children nodes.
 			if (input.equals("(")) {
 				currentNode = (Node) currentNode.children.get(currentNode.children.size() - 1);
 			}
+			
 			if (input.equals(")")) {
 				currentNode = (Node) currentNode.parent;
 			}
+			//If the input is an employee info, then proceed to process and append to tree.
 			if (!input.equals("(") && !input.equals(")")) {
 				String[] info = input.split(",");
 				Employee employee = new Employee(info[0].trim(), info[1].trim(), info[2].trim());
 				((GeneralTree<Employee>) employeeTree).insert(employee.getResumeID(), employee, currentNode);
 			}
-//			//If "(", then create new list of children specifically for the new parent node.
-//			//The new parent node would be the most recently added child node of the previous
-//			//parent node, which should be at the end of the list of children nodes.
-//			if (input.equals("(")) {
-//				Node parentNode = (Node) n.children.get(n.children.size() - 1);
-//				appendNodesToTree(parentNode, employeeInfo);
-//			}
-//			//If ")", then call appendNodesToTree, with the parent of the current parent node.
-//			if (input.equals(")")) {
-//				Node parentNode = (Node) n.parent;
-//				appendNodesToTree(parentNode, employeeInfo);
-//			}
-//			//If the input is an employee info, then proceed to process and append to tree.
-//			if (!input.equals("(") && !input.equals(")")) {
-//				String[] info = input.split(",");
-//				Employee employee = new Employee(info[0].trim(), info[1].trim(), info[2].trim());
-//				((GeneralTree<Employee>) employeeTree).insert(employee.getResumeID(), employee, n);
-//				appendNodesToTree(n, employeeInfo);
-//			}
 		}
 	}
 	
@@ -140,16 +126,17 @@ public class HumanResourcesManager {
 	}
 	
 	/**
-	 * A recursive algorithm that helps find the employee to remove, given the first
-	 * and last name of the employee. If the employee to remove is found, then the
-	 * chooseInterim recursive algorithm is called to replace the removed employee.
-	 * Returns the interim employee that replaces the removed employee, or null if
-	 * the interim employee was not found.
+	 * A recursive algorithm that helps find the employee to remove, given
+	 * the first and last name of the employee. If the employee to remove
+	 * is found, then the chooseInterim recursive algorithm is called to
+	 * replace the removed employee. Returns the interim employee that
+	 * replaces the removed employee, or null if the employee to remove
+	 * was not found.
 	 * 
 	 * @param node the current node to find the employee information
 	 * @param first the first name of the employee to remove
 	 * @param last the last name of the employee to remove
-	 * @return the employee information to be removed or null if the employee
+	 * @return the interim employee information or null if the employee
 	 * was not found
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
