@@ -89,7 +89,7 @@ public class HumanResourcesManagerTest {
 		assertEquals(expectedOP, hrm.generateOrganizationalProfile());
 		assertEquals(expectedR, hrm.getResumeTree().elementsInLevelOrder());
 		
-		assertEquals("The employee Kyle DeMarcino had no employees to supervise.",
+		assertEquals("No interim supervisor.",
 				hrm.removeEmployee("Kyle", "DeMarcino"));
 		expectedOP = "OrganizationalProfile[\n";
 		expectedOP += "   Jane Doe\n";

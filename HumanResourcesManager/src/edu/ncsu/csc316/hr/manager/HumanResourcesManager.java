@@ -109,7 +109,9 @@ public class HumanResourcesManager {
 	
 	/**
 	 * Returns a string representation of the interim employee
-	 * who replaces the removed employee.
+	 * who replaces the removed employee. If the removed employee
+	 * does not supervise any other employees, then remove the
+	 * employee and return "No interim supervisor"
 	 * 
 	 * @param first - the first name of the employee to remove
 	 * @param last - the last name of the employee to remove
@@ -151,11 +153,10 @@ public class HumanResourcesManager {
 			
 			//If the node we found has no children, that means that the
 			//employee we want to remove does not have any interim
-			//employees. Therefore, return null.
+			//employees. Therefore, return "No interim supervisor.
 			if (node.children.size() == 0) {
 				((GeneralTree<Employee>) employeeTree).remove(node.key, node);
-				return "The employee " + ((Employee) node.data).toString() + " had no employees"
-						+ " to supervise.";
+				return "No interim supervisor.";
 			}
 			chooseInterim(node);
 			String interim = ((Employee) node.data).toString();
