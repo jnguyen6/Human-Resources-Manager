@@ -74,25 +74,30 @@ public class HumanResourcesManagerUI {
 		System.out.print("Generate Organizational Profile (G), Remove an Employee from the "
 				+ "HR system (R), or Quit the Program (Q): ");
 		input = console.nextLine();
-		while (input.equals("G") || input.equals("R")) {
+		while (input.equalsIgnoreCase("G") || input.equalsIgnoreCase("R")) {
 			if (input.equalsIgnoreCase("G")) {
 				System.out.print("Generating Organizational Profile...\n\n");
 				String organizationalProfile = hrm.generateOrganizationalProfile();
 				System.out.print(organizationalProfile);
-				System.out.print("\n\nThe organizational profile has been sucessfully created.\n");
+				System.out.print("\n\nThe organizational profile has been sucessfully created.\n\n");
 			} else {
 				String name = "";
 				System.out.print("Please provide the first and last name of the employee to "
 					+ "remove from the HR system: ");
 				name = console.nextLine();
 				Scanner lineScanner = new Scanner(name);
-				System.out.print("Removing employee...\n\n");
 				String interim = hrm.removeEmployee(lineScanner.next(), lineScanner.next());
 				if (interim.indexOf("Employee was not found.") != -1) {
-					System.out.print(interim + "\n");
+					System.out.print("\n" + interim + "\n\n");
 				} else {
+					System.out.print("Removing employee...\n\n");
 					System.out.print("The employee has been removed from the HR system, and the HR system "
-							+ "is updated accordingly. The interim employee is: " + interim + "\n");
+							+ "is updated accordingly.\n\n");
+					if (interim.equals("No interim supervisor.")) {
+						System.out.print(interim + "\n\n");
+					} else {
+						 System.out.print("The interim employee is: " + interim + "\n\n");
+					}
 				}
 				lineScanner.close();
 			}
@@ -100,7 +105,7 @@ public class HumanResourcesManagerUI {
 					+ "HR system (R), or Quit the Program (Q): ");
 			input = console.nextLine();
 		}
-		System.out.print("\nThe Human Resources program will close.");
+		System.out.print("\nThe Human Resources Manager program will close.");
 		console.close();
 		System.exit(1);
 	}
