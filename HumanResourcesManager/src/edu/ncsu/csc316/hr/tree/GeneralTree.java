@@ -30,7 +30,10 @@ public class GeneralTree<E> implements Tree<E> {
 	
 	/**
 	 * Returns the element stored in the tree node. If the given node is null,
-	 * then a NullPointerException is thrown.
+	 * then a NullPointerException is thrown. Note that the idea of using a
+	 * getElement method is referenced from page 312 of the Data Structures &
+	 * Algorithm textbook by Michael T. Goodrich, Roberto Tamassia, and Michael
+	 * H. Goldwasser.
 	 * 
 	 * @param node the node to retrieve the element from
 	 * @return the element stored in the tree node
