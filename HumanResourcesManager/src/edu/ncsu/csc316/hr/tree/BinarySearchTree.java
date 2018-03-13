@@ -6,14 +6,12 @@ import edu.ncsu.csc316.hr.adt.Tree;
 import edu.ncsu.csc316.hr.list.LinkedList;
 
 /**
- * Class that represents the binary search tree data structure.
- * Specifically, the binary search tree uses the 2-3 tree 
- * implementation design, which is a generalization of the typical
- * binary search tree, and as such, maintains the typical search
- * properties and operations. Note that the generic type E extends
- * Comparable of a generic type, which was referenced from the
- * SortedArrayList class from project 3 of CSC216. The authors of
- * the class were Austin Hyder and Jimmy Nguyen.
+ * Class that represents the binary search tree data structure. Specifically,
+ * the binary search tree uses the 2-3 search tree implementation design,
+ * and as such, maintains the typical search properties and operations.
+ * Note that the generic type E extends Comparable of a generic type,
+ * which was referenced from the SortedArrayList class from project 3 of
+ * CSC216. The authors of the class are Austin Hyder and Jimmy Nguyen.
  *
  * @author Jimmy Nguyen
  * @param <E> the generic element type

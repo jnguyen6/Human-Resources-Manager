@@ -6,8 +6,7 @@ import edu.ncsu.csc316.hr.list.ArrayBasedList;
 import edu.ncsu.csc316.hr.list.LinkedList;
 
 /**
- * Class that represents the general tree data structure, which uses
- * the linked representation as the underlying data structure.
+ * Class that represents the general tree data structure.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type
@@ -306,7 +305,7 @@ public class GeneralTree<E> implements Tree<E> {
 	 * algorithm is referenced from the CSC316 Tree lecture slides on page
 	 * 22, provided by Jason King.
 	 * 
-	 * @return the string representation of all the elements in the tree
+	 * @return the String representation of all the elements in the tree
 	 */
 	public String elementsInLevelOrder() {
 		StringBuilder sb = new StringBuilder();

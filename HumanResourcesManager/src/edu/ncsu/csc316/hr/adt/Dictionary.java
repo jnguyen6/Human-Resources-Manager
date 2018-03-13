@@ -2,6 +2,8 @@ package edu.ncsu.csc316.hr.adt;
 
 /**
  * Interface class that represents the Dictionary abstract data type.
+ * Note that most of the Dictionary operations were reused from the
+ * Dictionary interface class from the CSC316 project 1.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type

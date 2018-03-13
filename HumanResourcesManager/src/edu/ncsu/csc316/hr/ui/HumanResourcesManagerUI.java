@@ -72,7 +72,7 @@ public class HumanResourcesManagerUI {
 		hrm = new HumanResourcesManager(employeeFile, resumeFile);
 		String input = "";
 		System.out.print("Generate Organizational Profile (G), Remove an Employee from the "
-				+ "HR system (R), or Quit the Program (Q): ");
+				+ "HR System (R), or Quit the Program (Q): ");
 		input = console.nextLine();
 		while (input.equalsIgnoreCase("G") || input.equalsIgnoreCase("R")) {
 			if (input.equalsIgnoreCase("G")) {

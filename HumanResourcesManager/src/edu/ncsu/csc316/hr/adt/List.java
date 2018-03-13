@@ -2,6 +2,8 @@ package edu.ncsu.csc316.hr.adt;
 
 /**
  * Interface class that represents the List abstract data type.
+ * Note that the List interface class is reused from the List
+ * interface class from CSC316 project 1.
  * 
  * @author Jimmy Nguyen
  * @param <E> the generic element type

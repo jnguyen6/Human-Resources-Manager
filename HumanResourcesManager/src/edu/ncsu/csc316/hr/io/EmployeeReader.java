@@ -16,9 +16,9 @@ public class EmployeeReader {
 
 	/**
 	 * Reads each input line from the employee information file and adds them to a 
-	 * linked list that uses a queue implementation. Returns the linked list of
-	 * all the content of the file once the file has been completely processed.
-	 * If the given file is not valid, then a FileNotFoundException is thrown.
+	 * linked list that uses a queue implementation. Returns the linked list that
+	 * contains all the content of the employee file once the file has been completely
+	 * processed. If the given file is not valid, then a FileNotFoundException is thrown.
 	 * 
 	 * @param employeeFile the input file containing employee information
 	 * @return the linked list that contains all the contents of the given
